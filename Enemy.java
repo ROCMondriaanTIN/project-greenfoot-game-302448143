@@ -3,7 +3,7 @@ import greenfoot.*;
 
 /**
  *
- * @author R. Springer
+ * @author 
  */
 public class Enemy extends Mover {
 
@@ -20,6 +20,7 @@ public class Enemy extends Mover {
         walkRange = 140;
         firstAct = true;
         speed = 1;
+        setLocation(250, 2000);
     }
 
     @Override

@@ -15,46 +15,34 @@ public class Hero extends Mover {
     public int x= 250;
     public int y= 1980;
     // 250, 1980
-    /*
-    private final Greenfootimage staand = new GreenfootImage("p1_walk01.png");
-    private final Greenfootimage loop1 = new GreenfootImage("p1_walk02.png");
-    private final Greenfootimage loop2 = new GreenfootImage("p1_walk03.png");
-    private final Greenfootimage loop3 = new GreenfootImage("p1_walk04.png");
-    private final Greenfootimage loop4 = new GreenfootImage("p1_walk05.png");
-    private final Greenfootimage loop5 = new GreenfootImage("p1_walk06.png");
-    private final Greenfootimage loop6 = new GreenfootImage("p1_walk07.png");
-    private final Greenfootimage loop7 = new GreenfootImage("p1_walk08.png");
-    private final Greenfootimage loop8 = new GreenfootImage("p1_walk09.png");
-    private final Greenfootimage loop9 = new GreenfootImage("p1_walk10.png");
-    private final Greenfootimage loop10 = new GreenfootImage("p1_walk01.png");
-    private final Greenfootimage loop11 = new GreenfootImage("p1_walk01.png");
-    private final Greenfootimage loop12 = new GreenfootImage("p1_walk01.png");
     
-    private final Greenfootimage staandinv = new GreenfootImage("");
-    private final Greenfootimage loop1inv = new GreenfootImage("");
-    private final Greenfootimage loop2inv = new GreenfootImage("");
-    private final Greenfootimage loop3inv = new GreenfootImage("");
-    private final Greenfootimage loop4inv = new GreenfootImage("");
-    private final Greenfootimage loop5inv = new GreenfootImage("");
-    private final Greenfootimage loop6inv = new GreenfootImage("");
-    private final Greenfootimage loop7inv = new GreenfootImage("");
-    private final Greenfootimage loop8inv = new GreenfootImage("");
-    private final Greenfootimage loop9inv = new GreenfootImage("");
-    private final Greenfootimage loop10inv = new GreenfootImage("");
-    private final Greenfootimage loop11inv = new GreenfootImage("");
-    private final Greenfootimage loop12inv = new GreenfootImage("");
+    private  GreenfootImage staand = new GreenfootImage("p1_walk01.png");
+    private  GreenfootImage loop1 = new GreenfootImage("p1_walk02.png");
+    private  GreenfootImage loop2 = new GreenfootImage("p1_walk03.png");
+    private  GreenfootImage loop3 = new GreenfootImage("p1_walk04.png");
+    private  GreenfootImage loop4 = new GreenfootImage("p1_walk05.png");
+    private  GreenfootImage loop5 = new GreenfootImage("p1_walk06.png");
+    private  GreenfootImage loop6 = new GreenfootImage("p1_walk07.png");
+    private  GreenfootImage loop7 = new GreenfootImage("p1_walk08.png");
+    private  GreenfootImage loop8 = new GreenfootImage("p1_walk09.png");
+    private  GreenfootImage loop9 = new GreenfootImage("p1_walk10.png");
+    private  GreenfootImage loop10 = new GreenfootImage("p1_walk01.png");
+    private  GreenfootImage loop11 = new GreenfootImage("p1_walk01.png");
+    private  GreenfootImage loop12 = new GreenfootImage("p1_walk01.png");
+    
+   
     
     private int speed = 3;
-    private int frame;
+    public int frame;
     private boolean lopen;
     private boolean Kijkenrechts;
     private boolean isKeypressed;
     
-    private boolean key = false;
+    private boolean Key = false;
     private boolean door = false;
     private boolean openDeur1 = false;
     private boolean touchDeur1 = false;
-    */
+    
     public Hero() {
         super();
         gravity = 9.8;
@@ -74,6 +62,8 @@ public class Hero extends Mover {
     public void act() {
         handleInput();
         checkpoint();
+        exitSign();
+        
        // positie();
        Doors();
        SpikeTile();
@@ -136,13 +126,16 @@ public class Hero extends Mover {
         }
     }
     public void handleInput() {
-        if ((Greenfoot.isKeyDown("w") && onGround() == true) || (Greenfoot.isKeyDown("w") && isTouching(Ladder.class)))    {
+        if ((Greenfoot.isKeyDown("w") && onGround() == true) || (Greenfoot.isKeyDown("w") && isTouching(Ladder.class) || (Greenfoot.isKeyDown("w") && isTouching(Rope.class))))    {
             velocityY = -15.7;
+            setImage("p1_jump.png");
         }
 
         if (Greenfoot.isKeyDown("a")) {
+            animatieLeft();
             velocityX = -8;
         } else if (Greenfoot.isKeyDown("d")) {
+            animatieRight();
             velocityX = 8;
         }
     }
@@ -160,6 +153,118 @@ public class Hero extends Mover {
     public int getHeight() {
         return getImage().getHeight();
     }
+    public void animatieLeft()
+    {
+  
+    
+    if(frame ==1)
+    {
+        setImage(loop1);    
+    }
+    else if(frame ==2)
+    {
+        setImage(loop2);
+    }
+    else if(frame ==3)
+    {
+        setImage(loop3);
+    }
+    else if(frame ==4)
+    {
+        setImage(loop4);
+    }
+    else if(frame ==5)
+    {
+        setImage(loop5);
+    }
+    else if(frame ==6)
+    {
+        setImage(loop6);
+    }
+    else if(frame ==7)
+    {
+        setImage(loop7);
+    }
+    else if(frame ==8)
+    {
+        setImage(loop8);
+    }
+    else if(frame ==9)
+    {
+        setImage(loop9);
+    }
+    else if(frame ==10)
+    {
+        setImage(loop10);
+    }
+    else if(frame ==11)
+    {
+        setImage(loop11);
+    }
+    else if(frame ==12)
+    {
+        setImage(loop8);
+        frame= 1;
+        return ;
+    }
+    frame++;
+}
+    public void animatieRight()
+    {
+  
+    
+    if(frame ==1)
+    {
+        setImage(loop1);    
+    }
+    else if(frame ==2)
+    {
+        setImage(loop2);
+    }
+    else if(frame ==3)
+    {
+        setImage(loop3);
+    }
+    else if(frame ==4)
+    {
+        setImage(loop4);
+    }
+    else if(frame ==5)
+    {
+        setImage(loop5);
+    }
+    else if(frame ==6)
+    {
+        setImage(loop6);
+    }
+    else if(frame ==7)
+    {
+        setImage(loop7);
+    }
+    else if(frame ==8)
+    {
+        setImage(loop8);
+    }
+    else if(frame ==9)
+    {
+        setImage(loop9);
+    }
+    else if(frame ==10)
+    {
+        setImage(loop10);
+    }
+    else if(frame ==11)
+    {
+        setImage(loop11);
+    }
+    else if(frame ==12)
+    {
+        setImage(loop8);
+        frame= 1;
+        return ;
+    }
+    frame++;
+}
     
     public void Doors()
     {
@@ -194,7 +299,12 @@ public class Hero extends Mover {
             checkpoint();
         }
     }
-    
+    public void exitSign(){
+    if(isTouching(ExitSign.class))
+        {
+            Greenfoot.setWorld(new Wereld2());
+        }
+    }
     public boolean eatKeys()
     {
         Actor Key = getOneIntersectingObject(Key.class);

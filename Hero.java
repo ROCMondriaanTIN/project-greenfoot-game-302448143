@@ -37,7 +37,7 @@ public class Hero extends Mover {
     private boolean lopen;
     private boolean Kijkenrechts;
     private boolean isKeypressed;
-    
+    public int checkpoint = 0;
     private boolean Key = false;
     private boolean door = false;
     private boolean openDeur1 = false;
@@ -77,6 +77,7 @@ public class Hero extends Mover {
         applyVelocity();
         eatKeys();
         removeLock();
+        getWorld().showText(getX() + "," + getY(),500,50);
         
         List<Enemy> enemies = new ArrayList<>();
         //this.getIntersectionObjects(Door.class);
@@ -105,7 +106,7 @@ public class Hero extends Mover {
        for (Actor enemy : getIntersectingObjects(SpikeTile.class)) {
             if (enemy != null) {
                 //getWorld().removeObject(this);
-                setLocation(x, y);
+                respawn();
                 return;
             }
         }
@@ -121,12 +122,13 @@ public class Hero extends Mover {
     {
         if (isTouching(Checkpoint.class))
         {
-        x=getX();
-        y=getY();
+        checkpoint = 1;
         }
+        if
+        
     }
     public void handleInput() {
-        if ((Greenfoot.isKeyDown("w") && onGround() == true) || (Greenfoot.isKeyDown("w") && isTouching(Ladder.class) || (Greenfoot.isKeyDown("w") && isTouching(Rope.class))))    {
+        if ((Greenfoot.isKeyDown("w") && onGround() == true) ||  (Greenfoot.isKeyDown("w") && isTouching(Ladder.class) || (Greenfoot.isKeyDown("w") && isTouching(Rope.class))))    {
             velocityY = -15.7;
             setImage("p1_jump.png");
         }
@@ -139,6 +141,27 @@ public class Hero extends Mover {
             velocityX = 8;
         }
     }
+    public void respawn()
+{
+    
+    if(checkpoint == 1){
+    setLocation(2785, 1990);
+    }
+    else if (checkpoint == 2){
+    setLocation(500, 500);
+    }
+    else if (checkpoint == 3){
+    setLocation(500, 500);
+    }
+    else if (checkpoint == 4){
+    setLocation(500, 500);
+    }
+    else
+    {
+    setLocation(87, 2890);
+}
+}
+
     public boolean onGround()
     {
         Actor under = getOneObjectAtOffset(0, getHeight()/2, Tile.class);

@@ -42,6 +42,7 @@ public class Hero extends Mover {
     private boolean door = false;
     private boolean openDeur1 = false;
     private boolean touchDeur1 = false;
+    public int wereldnummer = 1;
     
     public Hero() {
         super();
@@ -68,6 +69,7 @@ public class Hero extends Mover {
        Doors();
        SpikeTile();
        onGround();
+       getWorld().showText(getX() + "," + getY(),500,50);
        
         velocityX *= drag;
         velocityY += acc;
@@ -91,14 +93,14 @@ public class Hero extends Mover {
         for (Actor enemy : getIntersectingObjects(LavaTile.class)) {
             if (enemy != null) {
                 //getWorld().removeObject(this);
-                setLocation(x, y);
+                respawn();
                 return;
             }
         }
         for (Actor enemy : getIntersectingObjects(water.class)) {
             if (enemy != null) {
                 //getWorld().removeObject(this);
-                setLocation(x, y);
+                respawn();
                 return;
             }
         }
@@ -122,10 +124,20 @@ public class Hero extends Mover {
     {
         if (isTouching(Checkpoint.class))
         {
-        checkpoint = 1;
+            checkpoint = 1;
         }
-        if
-        
+        if (isTouching(Checkpoint2.class))
+        {
+            checkpoint = 2;
+        }
+        if (isTouching(Checkpoint3.class))
+        {
+            checkpoint = 3;
+        }
+        if (isTouching(Checkpoint4.class))
+        {
+            checkpoint = 4;
+        }
     }
     public void handleInput() {
         if ((Greenfoot.isKeyDown("w") && onGround() == true) ||  (Greenfoot.isKeyDown("w") && isTouching(Ladder.class) || (Greenfoot.isKeyDown("w") && isTouching(Rope.class))))    {
@@ -143,22 +155,28 @@ public class Hero extends Mover {
     }
     public void respawn()
 {
+    if ( wereldnummer == 1 && checkpoint == 1){
+        
+    setLocation(1839,2683);
     
-    if(checkpoint == 1){
-    setLocation(2785, 1990);
     }
-    else if (checkpoint == 2){
+    
+    else if (wereldnummer == 2 &&checkpoint == 2){
+    setLocation(670, 2100);
+    }
+    else if (wereldnummer == 2 &&checkpoint == 3){
     setLocation(500, 500);
     }
-    else if (checkpoint == 3){
+    else if (wereldnummer == 2 &&checkpoint == 4){
     setLocation(500, 500);
     }
-    else if (checkpoint == 4){
-    setLocation(500, 500);
-    }
-    else
+    else if (wereldnummer == 1)
     {
-    setLocation(87, 2890);
+    setLocation(250,1982);
+}
+else if ( wereldnummer == 2 )
+{
+    setLocation(670, 2100);
 }
 }
 
@@ -300,32 +318,35 @@ public class Hero extends Mover {
         {
             setLocation(322, 1143);
         }
+        
     }
     public void SpikeTile()
     {
         if(isTouching(SpikeTile.class))
         {
-            checkpoint();
+            respawn();
         }
     }
     public void LavaTile()
     {
         if(isTouching(LavaTile.class))
         {
-            checkpoint();
+            respawn();
         }
     }
     public void water()
     {
         if(isTouching(water.class))
         {
-            checkpoint();
+            respawn();
         }
     }
     public void exitSign(){
     if(isTouching(ExitSign.class))
         {
             Greenfoot.setWorld(new Wereld2());
+            wereldnummer = 2;
+            setLocation (670, 2100);
         }
     }
     public boolean eatKeys()
